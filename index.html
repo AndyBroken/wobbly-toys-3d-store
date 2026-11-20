@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wobbly Toys — Toys With Extra Boing</title>
+<meta name="description" content="Wobbly Toys: a playful 3D toy store. Squishy, bouncy, built-to-last toys for tiny humans. Concept / demo project.">
+<meta name="theme-color" content="#FFF3EA">
+<meta property="og:title" content="Wobbly Toys — Toys With Extra Boing">
+<meta property="og:description" content="A playful 3D toy store where every toy bounces, squashes and stretches.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><defs><radialGradient id='g' cx='.35' cy='.3'><stop offset='0' stop-color='%23FFC2DB'/><stop offset='1' stop-color='%23FF6FA8'/></radialGradient></defs><circle cx='20' cy='20' r='17' fill='url(%23g)'/><circle cx='15' cy='18' r='2.4' fill='%233A2E5A'/><circle cx='25' cy='18' r='2.4' fill='%233A2E5A'/></svg>">
+<link rel="stylesheet" href="assets/style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="blobs" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i><i class="b4"></i></div>
+
+<header class="header">
+  <a class="logo" href="#top" aria-label="Wobbly Toys home"><span class="logo-ball"></span>Wobbly<b>Toys</b></a>
+  <nav class="nav" id="mainNav" aria-label="Main">
+    <a href="#shop">Shop</a>
+    <a href="#build">Build-a-Buddy</a>
+    <a href="#promise">Our promise</a>
+    <a href="#club">Boing Club</a>
+  </nav>
+  <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+    <span class="slot cart-slot" id="cartSlot"></span>
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow pop">✦ New: the spring squish drop</span>
+      <h1 class="title" id="title" aria-label="Toys with a little extra boing.">Toys with a little extra boing.</h1>
+      <p class="lead pop">Squishy, bouncy, built-to-last toys for tiny humans. Every toy is non-toxic, drop-tested and certified 100% huggable.</p>
+      <div class="ctas pop">
+        <a class="btn btn-pink" href="#shop">Shop toys</a>
+        <a class="btn btn-soft" href="#build">Build a buddy</a>
+      </div>
+      <ul class="perks pop">
+        <li><b>Free</b> shipping over $50</li>
+        <li><b>30-day</b> happy returns</li>
+        <li><b>BPA-free</b> &amp; non-toxic</li>
+      </ul>
+    </div>
+    <div class="stage" id="stage">
+      <div class="stage-glow" aria-hidden="true"></div>
+      <div class="hint pop"><span class="h-mouse">Tap a toy · hover to wake it up</span><span class="h-touch">Tap a toy to make it bounce</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="shop wrap" id="shop">
+  <div class="sec-head">
+    <div>
+      <span class="kicker pop">The shop</span>
+      <h2 class="pop">Shop the bounciest</h2>
+    </div>
+    <div class="filters pop" aria-label="Filter by age">
+      <button class="chip on" data-age="all">All toys</button>
+      <button class="chip" data-age="0-2">Ages 0–2</button>
+      <button class="chip" data-age="3-5">Ages 3–5</button>
+      <button class="chip" data-age="6+">Ages 6+</button>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="build wrap" id="build">
+  <div class="build-stage pop">
+    <div class="slot buddy-slot" id="buddySlot" title="Drag to spin · tap to hop"></div>
+    <div class="name-tag" id="nameTag">Biscuit</div>
+    <div class="spin-hint">⟲ drag to spin</div>
+  </div>
+  <div class="build-panel pop">
+    <span class="kicker">Build-a-Buddy</span>
+    <h2>Make a bear that's 100% theirs</h2>
+    <p class="muted">Pick a fur color, a face and a little something extra. We stitch the name on the tag.</p>
+    <div class="opt"><div class="opt-label">Fur color</div><div class="swatches" id="colors"></div></div>
+    <div class="opt"><div class="opt-label">Face</div><div class="chips" id="eyes"></div></div>
+    <div class="opt"><div class="opt-label">Extra</div><div class="chips" id="accs"></div></div>
+    <div class="opt">
+      <label class="opt-label" for="buddyName">Name on the tag</label>
+      <input class="input" id="buddyName" maxlength="14" value="Biscuit" autocomplete="off">
+    </div>
+    <div class="build-buy">
+      <div class="price"><span id="buddyPrice">$34</span><small>handmade in 5 days</small></div>
+      <button class="btn btn-yellow" id="buddyAdd">Add my buddy</button>
+    </div>
+  </div>
+</section>
+
+<section class="promise wrap" id="promise">
+  <span class="kicker pop">Our promise</span>
+  <h2 class="pop">Made for real-life play</h2>
+  <div class="promise-grid">
+    <article class="p-card pop"><div class="slot p-slot" data-kind="duck"></div><h3>Safe from day one</h3><p>Non-toxic, BPA-free materials, safety-tested by an independent lab before anything hits the shelf.</p></article>
+    <article class="p-card pop"><div class="slot p-slot" data-kind="block"></div><h3>Built to be bounced</h3><p>Two-year "oops, I dropped it" warranty. If it breaks during honest play, we replace it.</p></article>
+    <article class="p-card pop"><div class="slot p-slot" data-kind="star"></div><h3>Happy returns</h3><p>Not the one? Send it back within 30 days with a free return label. No questions, no fuss.</p></article>
+  </div>
+</section>
+
+<section class="club wrap" id="club">
+  <div class="club-box pop">
+    <div class="slot club-slot" data-kind="octo"></div>
+    <div class="club-copy">
+      <h2>Join the Boing Club</h2>
+      <p>10% off your first order, early access to new drops and a little birthday surprise.</p>
+      <form class="club-form" id="clubForm" novalidate>
+        <label class="sr" for="email">Email</label>
+        <input class="input" id="email" type="email" placeholder="you@email.com" autocomplete="email">
+        <button class="btn btn-pink" type="submit">Count me in</button>
+      </form>
+      <p class="form-msg" id="formMsg" role="status"></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer wrap">
+  <div class="foot-brand"><span class="logo"><span class="logo-ball"></span>Wobbly<b>Toys</b></span><p>Toys with a little extra boing.</p></div>
+  <div class="foot-cols">
+    <div><b>Shop</b><a href="#shop">All toys</a><a href="#build">Build-a-Buddy</a><a href="#shop">Gift cards</a></div>
+    <div><b>Help</b><a href="#promise">Shipping</a><a href="#promise">Returns</a><a href="#promise">Safety</a></div>
+  </div>
+  <p class="foot-note">Concept / demo project. Wobbly Toys is a fictional brand; no orders are placed and no messages are sent.</p>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Cart" aria-hidden="true">
+  <div class="drawer-head"><h3>Your toy bag</h3><button class="icon-btn" id="closeCart" aria-label="Close cart">✕</button></div>
+  <div class="ship"><div class="ship-text" id="shipText">Add $50 for free shipping</div><div class="ship-bar"><span id="shipBar"></span></div></div>
+  <ul class="cart-list" id="cartList"></ul>
+  <div class="drawer-foot">
+    <div class="subtotal"><span>Subtotal</span><b id="subtotal">$0</b></div>
+    <button class="btn btn-pink btn-wide" id="checkout">Checkout</button>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script type="module" src="assets/main.js"></script>
+</body>
+</html>
