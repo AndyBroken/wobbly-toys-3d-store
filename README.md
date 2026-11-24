@@ -17,3 +17,7 @@ Online toy store for a fictional brand. Every product is a real-time 3D toy that
 `?shot` turns off entrance animations for screenshots.
 
 *Concept / demo project. Wobbly Toys is a fictional brand; no orders are placed and no messages are sent.*
+
+## License
+
+© 2026 Andrey ([AndyBroken](https://github.com/AndyBroken)). All rights reserved. This is a portfolio demo: you may view it, but not copy or reuse the code or design. See [LICENSE](LICENSE).

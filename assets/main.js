@@ -1,3 +1,4 @@
+/*! © 2026 Andrey (github.com/AndyBroken). All rights reserved. Concept / demo project, see LICENSE. */
 /* Wobbly Toys — full 3D cartoon toy store (concept demo).
    One fixed Three.js canvas draws every toy; each toy is anchored to a DOM "slot",
    so layout, scroll and clicks stay normal HTML. Static camera, all motion is squash & stretch. */
